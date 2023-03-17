@@ -10,7 +10,7 @@ node {
 
 	stage('Build image'){
 
-		my_app = docker.build('040803323661.dkr.ecr.us-west-2.amazonaws.com/my_app', 'my_app')
+		my_app = docker.build('040803323661.dkr.ecr.us-west-2.amazonaws.com/my_app')
 
 
 	}
