@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Update the system
-sudo yum update -y
+sudo apt-get update -y
 
 # Install Docker
-sudo amazon-linux-extras install docker -y
+sudo apt install docker.io -y
 
 # Start docker service
 sudo service docker start
@@ -13,23 +13,26 @@ sudo service docker start
 sudo systemctl enable docker
 
 # Switch user mode to ec2-user
-sudo usermod -aG docker ec2-user
+sudo usermod -aG docker ubuntu
 
 # Installing Jenkins
-sudo wget -O /etc/yum.repos.d/jenkins.repo \
-    https://pkg.jenkins.io/redhat-stable/jenkins.repo
 
-sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+sudo apt-get upgrade -y
 
-sudo yum upgrade -y
+sudo apt-get install openjdk-11-jdk -y
 
-sudo amazon-linux-extras install java-openjdk11 -y
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
 
-sudo yum install jenkins -y
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
 
-sudo systemctl enable jenkins
+sudo apt-get update -y
 
-sudo systemctl start jenkins
+sudo apt-get install jenkins -y
+
+sudo systemctl start jenkins.service
 
 sudo systemctl status jenkins
 

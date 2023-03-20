@@ -91,13 +91,10 @@ resource "aws_security_group" "jenkins_sg" {
 }
 
 
-
-
-
 # Creates instance for Jenkins server
 resource "aws_instance" "Jenkins-server" {
 
-  ami           = "ami-06e85d4c3149db26a"
+  ami           = "ami-0a97be4c4be6d6cc4"
   instance_type = "t2.medium"
   # count                       = 2
   key_name  = "k8s-intances"
