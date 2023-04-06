@@ -26,4 +26,10 @@ node {
 	}
 
 
+	stage('Deploy'){
+
+		sh " docker run --name test-app -d -p 8081:80 040803323661.dkr.ecr.us-west-2.amazonaws.com/my_app:latest "
+	}
+
+
 }
