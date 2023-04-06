@@ -28,8 +28,9 @@ node {
 
 	stage('Deploy'){
 
-		my_app.run('-p 8081:80')
+		//my_app.run('040803323661.dkr.ecr.us-west-2.amazonaws.com/my_app:latest', '8081:80')
 
+		sh " docker run --name test-app -d -p 8081:80  "
 	}
 
 
