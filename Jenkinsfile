@@ -1,4 +1,4 @@
-node {
+node('docker') {
 
 	def my_app
 
