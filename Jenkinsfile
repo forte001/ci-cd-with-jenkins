@@ -1,6 +1,11 @@
 node {
 
 	def my_app
+	tools {
+
+  	'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
+		}
+
 
 	stage('Clone Repository') {
 
@@ -17,13 +22,16 @@ node {
 
 	stage('Push image'){
 
-		docker.withRegistry('https://040803323661.dkr.ecr.us-west-2.amazonaws.com/', 'ecr:us-west-2:my-aws-credentials') {
+		docker.withTool('docker'){
+
+			docker.withRegistry('https://040803323661.dkr.ecr.us-west-2.amazonaws.com/', 'ecr:us-west-2:my-aws-credentials') {
 			
 			my_app.push("my-test-app-${env.BUILD_NUMBER}")
 			my_app.push("latest")
 		}
 
 	}
+}
 
 
 	stage('Deploy'){
